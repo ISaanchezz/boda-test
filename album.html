@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Álbum de fotos - Boda Iván & Nuria</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Playfair+Display:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --color-eucalipto: #2d4c41;
+            --color-crema: #f9f7f2;
+            --color-dorado: #b59d7e;
+            --color-texto: #333333;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            background-color: var(--color-crema);
+            color: var(--color-texto);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            padding: 24px 16px 10px;
+            text-align: center;
+            border-bottom: 1px solid #e0ded7;
+            background: rgba(249, 247, 242, 0.98);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+        }
+
+        header h1 {
+            margin: 0;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: var(--color-eucalipto);
+        }
+
+        header p {
+            margin: 6px 0 0;
+            color: #777;
+            font-size: 0.95rem;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 28px 16px 40px;
+            width: 100%;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 26px 22px 26px;
+            box-shadow: 0 14px 36px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        h2 {
+            margin: 0 0 10px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.1rem;
+            color: var(--color-eucalipto);
+        }
+
+        p {
+            margin: 0 0 14px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        ul {
+            margin: 10px 0 0;
+            padding-left: 1.2rem;
+            color: #555;
+        }
+
+        /* Botón principal y efectos de carga */
+        .btn-main {
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 26px;
+            margin-top: 20px;
+            border-radius: 999px;
+            border: none;
+            background: var(--color-eucalipto);
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
+            transition: background 0.3s ease, transform 0.15s ease;
+        }
+
+        .btn-main:hover {
+            background: #3b6b5a;
+            transform: translateY(-1px);
+        }
+
+        .btn-main.loading {
+            background-color: #2d4c41;
+            cursor: wait;
+        }
+
+        .btn-main span {
+            display: inline-block;
+            transition: opacity 0.4s ease, transform 0.3s ease;
+        }
+
+        .btn-main .button-text {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-main .loading-text {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0.95);
+            z-index: 1;
+        }
+
+        .btn-main.loading .button-text {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        .btn-main.loading .loading-text {
+            opacity: 1;
+            transform: scale(1);
+            animation: pulse 1.2s infinite;
+        }
+
+        /* Animación de pulso para icono de carga y spinner */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+                /* Reducido un poco para que sea más sutil con el spinner */
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+            display: inline-block;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Ajuste del contenedor de texto de carga para incluir el spinner */
+        .btn-main .loading-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            color: var(--color-eucalipto);
+            font-size: 0.9rem;
+            margin-top: 18px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 12px 16px 20px;
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        /* === MODO NOCHE === */
+        body.night-mode {
+            background-color: #202825;
+            color: #f2f2f2;
+        }
+
+        body.night-mode header {
+            background: rgba(32, 40, 37, 0.98);
+            border-bottom-color: #2e3d38;
+        }
+
+        body.night-mode header h1,
+        body.night-mode h2 {
+            color: var(--color-dorado);
+        }
+
+        body.night-mode header p {
+            color: #aaa;
+        }
+
+        body.night-mode .card {
+            background-color: #28332f;
+            border-color: rgba(255, 255, 255, 0.05);
+            color: #f2f2f2;
+        }
+
+        body.night-mode p,
+        body.night-mode ul {
+            color: #ccc;
+        }
+
+        body.night-mode .back-link {
+            color: var(--color-dorado);
+        }
+
+        body.night-mode footer {
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Álbum de fotos</h1>
+        <p>Comparte con nosotros tus fotos de la boda 💚</p>
+    </header>
+
+    <main>
+        <section class="card" aria-label="Álbum compartido de fotos">
+            <h2>Sube aquí tus fotos</h2>
+            <p>
+                Hemos creado un álbum compartido para que podáis subir directamente vuestras fotos
+                de la boda. Momentos espontáneos, bailes, selfies… ¡todo suma!
+            </p>
+            <p>
+                Al abrir el álbum podrás:
+            </p>
+            <ul>
+                <li>Ver las fotos que vayan subiendo los invitados.</li>
+                <li>Añadir tus propias fotos y vídeos al instante.</li>
+            </ul>
+
+            <details>
+                <summary>¿Cómo subir fotos?</summary>
+                <p>1. Tener Google Fotos</p>
+                <p>2. Pulsa "Añadir fotos"</p>
+                <p>3. Selecciona desde tu galería</p>
+                <p>4. Confirma y listo 💚</p>
+            </details>
+
+            <!-- SUSTITUYE ESTE ENLACE POR EL DE TU ÁLBUM COMPARTIDO (por ejemplo Google Fotos) -->
+            <a href="https://photos.app.goo.gl/7YadLHwrnHtN8Smg9" target="_blank" rel="noopener noreferrer"
+                class="btn-main" id="album-loading-button">
+                <span class="button-text">📷 Abrir álbum compartido</span>
+                <span class="loading-text" aria-hidden="true">
+                    <div class="loading-content">
+                        <span class="spinner"></span>
+                        Cargando los mejores momentos...
+                    </div>
+                </span>
+            </a>
+
+            <a href="#" id="back-to-invite" class="back-link">
+                ← Volver a la invitación
+            </a>
+        </section>
+    </main>
+
+    <footer>
+        Álbum compartido de la boda de Iván &amp; Nuria
+    </footer>
+
+    <script>
+        // Modo día / noche automático (según hora local del visitante)
+        (function autoNightMode() {
+            const hour = new Date().getHours();
+            if (hour >= 20 || hour < 8) {
+                document.body.classList.add('night-mode');
+            }
+        })();
+    </script>
+
+    <script>
+        // Navegar de vuelta a la invitación (respetando URL personalizada y saltando animación)
+        (function setupBackToInvite() {
+            const link = document.getElementById('back-to-invite');
+            if (!link) return;
+
+            function getReturnUrl() {
+                if (document.referrer) {
+                    return document.referrer;
+                }
+                const params = new URLSearchParams(window.location.search);
+                const invitado = params.get('invitado');
+                if (invitado) {
+                    return 'index.html?invitado=' + encodeURIComponent(invitado);
+                }
+                return 'index.html';
+            }
+
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const url = getReturnUrl();
+
+                try {
+                    if (window.opener && !window.opener.closed) {
+                        window.opener.localStorage.setItem('skipEnvelopeOnce', '1');
+                        window.opener.location.href = url;
+                        window.close();
+                        return;
+                    }
+                } catch (err) {
+                    // Si hay problemas de cross-origin, seguimos con el plan B en esta misma ventana
+                }
+
+                // Plan B: misma ventana
+                try {
+                    localStorage.setItem('skipEnvelopeOnce', '1');
+                } catch (err) { }
+                window.location.href = url;
+            });
+        })();
+    </script>
+
+    <script>
+        // Add event listener for the album button loading state
+        (function setupAlbumButton() {
+            const button = document.getElementById('album-loading-button');
+            if (!button) return;
+
+            button.addEventListener('click', function (e) {
+                // Prevenir la navegación inmediata para mostrar la animación
+                e.preventDefault();
+
+                const targetUrl = this.getAttribute('href');
+                const targetWindow = this.getAttribute('target') || '_self';
+
+                // Si ya está cargando, no hacer nada
+                if (this.classList.contains('loading')) return;
+
+                this.classList.add('loading');
+                this.setAttribute('disabled', 'disabled');
+
+                // Esperar 2 segundos de animación antes de abrir el enlace
+                setTimeout(() => {
+                    window.open(targetUrl, targetWindow);
+
+                    // Opcional: Quitar la clase loading después de un tiempo por si el usuario vuelve a la pestaña
+                    setTimeout(() => {
+                        this.classList.remove('loading');
+                        this.removeAttribute('disabled');
+                    }, 1000);
+                }, 2000); // 2000ms = 2 segundos de animación
+            });
+        })();
+    </script>
+</body>
+
+</html>

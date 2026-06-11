@@ -1,0 +1,2365 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boda de Iván & Nuria</title>
+    <meta property="og:title" content="Boda de Iván & Nuria">
+    <meta property="og:description" content="26 de Junio de 2027 💚 ¡Nos encantaría que nos acompañaras!">
+    <meta property="og:image" content="https://isaanchezz.github.io/nuestra-boda/f6.jpeg">
+    <meta property="og:url" content="https://isaanchezz.github.io/nuestra-boda/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Boda Iván & Nuria">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon-192x192.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Playfair+Display:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --color-eucalipto: #2d4c41;
+            /* Verde oscuro de la foto */
+            --color-crema: #f9f7f2;
+            --color-dorado: #b59d7e;
+            /* Dorado principal unificado */
+            --color-texto: #333333;
+            --color-acento: #86a397;
+            /* Verde clarito para detalles */
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            background-color: var(--color-crema);
+            overflow-x: hidden;
+            color: var(--color-texto);
+            text-align: center;
+            scroll-behavior: smooth;
+            min-height: 100vh;
+            position: relative;
+            z-index: 0;
+        }
+
+        /* Modo noche automático (ligero) */
+        body.night-mode {
+            background-color: #202825;
+            color: #f2f2f2;
+        }
+
+        body.night-mode .section,
+        body.night-mode .card-map,
+        body.night-mode .form-container,
+        body.night-mode .gallery-thumb,
+        body.night-mode .whatsapp-panel {
+            background-color: #28332f;
+            color: #f2f2f2;
+        }
+
+        body.night-mode header h1,
+        body.night-mode .story-title,
+        body.night-mode h2,
+        body.night-mode h3 {
+            color: var(--color-dorado);
+        }
+
+        body.night-mode .card-invitation {
+            background-color: #28332f;
+            color: #f2f2f2;
+        }
+
+        body.night-mode .card-invitation .date {
+            color: var(--color-dorado);
+        }
+
+        /* Textos verdes → dorado en modo noche */
+        body.night-mode .countdown-number,
+        body.night-mode .timeline-item i,
+        body.night-mode .gift-iban-code,
+        body.night-mode .gift-iban-msg,
+        body.night-mode .back-link {
+            color: var(--color-dorado);
+        }
+
+        body.night-mode .story-content p,
+        body.night-mode .form-container p {
+            color: #ccc;
+        }
+
+        body.night-mode .countdown-box {
+            background-color: #28332f;
+        }
+
+        body.night-mode .story-content {
+            background-color: #28332f;
+        }
+
+        /* Capa muy suave con la imagen de fondo */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: url('D15.jpg');
+            background-repeat: repeat;
+            background-size: 380px 380px;
+            opacity: 0.08;
+            /* Ajusta entre 0.03 y 0.15 según quieras */
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- SOBRE REALISTA --- */
+        .envelope-wrapper {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #e8e4db;
+            perspective: 1500px;
+            z-index: 1000;
+            transition: opacity 1.2s ease 0.8s, filter 1.2s ease 0.8s;
+        }
+
+        .envelope-wrapper.hidden {
+            opacity: 0;
+            filter: blur(10px);
+            pointer-events: none;
+            visibility: hidden;
+            position: fixed;
+        }
+
+        .envelope {
+            position: relative;
+            width: 480px;
+            height: 320px;
+            background: linear-gradient(135deg, #3f6b5a, var(--color-eucalipto));
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.18);
+            border-radius: 6px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        /* caras del sobre (triángulos) */
+        .envelope-front {
+            position: absolute;
+            inset: 0;
+        }
+
+        .envelope-front::before,
+        .envelope-front::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            border-bottom: 190px solid #4f8170;
+        }
+
+        .envelope-front::before {
+            left: 0;
+            border-right: 240px solid transparent;
+        }
+
+        .envelope-front::after {
+            right: 0;
+            border-left: 240px solid transparent;
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-top: 190px solid #244037;
+            border-left: 240px solid transparent;
+            border-right: 240px solid transparent;
+            transform-origin: top;
+            transition: transform 0.9s ease-in-out;
+            z-index: 5;
+        }
+
+        .envelope-seal {
+            position: absolute;
+            top: 155px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: auto;
+            min-width: 60px;
+            height: 60px;
+            border-radius: 999px;
+            background: var(--color-crema);
+            color: var(--color-eucalipto);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            z-index: 6;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            font-size: 0.95rem;
+            padding: 0 10px;
+            text-align: center;
+            box-sizing: border-box;
+            white-space: nowrap;
+        }
+
+        .card-invitation {
+            position: absolute;
+            left: 50%;
+            top: 60%;
+            transform: translate(-50%, 60%);
+            width: 420px;
+            background: #fff;
+            border-radius: 8px;
+            padding: 32px 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+            box-sizing: border-box;
+            opacity: 0;
+            transition: transform 0.9s ease-in-out, opacity 0.9s ease-in-out;
+            z-index: 2;
+        }
+
+        .card-invitation h2 {
+            font-family: 'Dancing Script';
+            color: var(--color-eucalipto);
+            margin: 0;
+            font-size: 2.6rem;
+        }
+
+        .card-invitation .names {
+            font-size: 1.9rem;
+            margin: 14px 0 6px;
+            color: #555;
+        }
+
+        .card-invitation .date {
+            color: var(--color-dorado);
+            font-weight: bold;
+            letter-spacing: 3px;
+            font-size: 1.1rem;
+        }
+
+        /* estados al abrir */
+        .envelope.open .envelope-flap {
+            transform: rotateX(180deg);
+        }
+
+        .envelope.open .envelope-seal {
+            opacity: 0;
+            transform: translateX(-50%) scale(0.85);
+        }
+
+        .envelope.open .card-invitation {
+            opacity: 1;
+            transform: translate(-50%, -120%);
+        }
+
+        /* carta ya en el centro de la pantalla */
+        .card-centered {
+            position: fixed !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            z-index: 1500 !important;
+            transition: transform 0.9s ease, opacity 0.9s ease;
+        }
+
+        /* animación de la carta hacia el header */
+        .card-to-header {
+            transform: translate(-50%, -130%) scale(0.6) !important;
+            opacity: 0;
+        }
+
+        /* --- CONTENIDO WEB --- */
+        #main-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 2s ease;
+            padding: 60px 15px;
+        }
+
+        h1 {
+            font-family: 'Dancing Script';
+            font-size: 5rem;
+            color: var(--color-eucalipto);
+            margin: 0;
+        }
+
+        .gran-dia {
+            letter-spacing: 5px;
+            color: var(--color-dorado);
+            font-weight: bold;
+            margin-bottom: 50px;
+        }
+
+        .section {
+            margin: 100px auto;
+            max-width: 900px;
+        }
+
+        /* --- CONTADOR --- */
+        .countdown-wrapper {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .countdown-box {
+            background: white;
+            padding: 18px 22px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+            min-width: 90px;
+        }
+
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-eucalipto);
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-dorado);
+        }
+
+        /* Pequeña animación al llegar a 0 */
+        .countdown-wrapper.celebrate .countdown-box {
+            animation: countdown-pop 0.55s ease-in-out 0s 2;
+        }
+
+        .countdown-wrapper.celebrate::after {
+            content: "🥂";
+            position: absolute;
+            left: 50%;
+            top: -18px;
+            transform: translate(-50%, 10px) scale(0.7);
+            font-size: 2.2rem;
+            opacity: 0;
+            pointer-events: none;
+            filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.12));
+            animation: cheers-float 1.2s ease-out forwards;
+        }
+
+        @keyframes countdown-pop {
+            0% {
+                transform: scale(1);
+            }
+
+            45% {
+                transform: scale(1.06);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes cheers-float {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, 10px) scale(0.7) rotate(-10deg);
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -46px) scale(1) rotate(10deg);
+            }
+        }
+
+        /* === NUESTRA HISTORIA CON REVEAL === */
+        .story-section {
+            margin-top: 120px;
+        }
+
+        .story-title {
+            font-family: 'Dancing Script';
+            font-size: 3rem;
+            color: var(--color-eucalipto);
+            margin-bottom: 70px;
+        }
+
+        .story-timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        /* Línea central */
+        .story-timeline::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--color-eucalipto);
+            transform: translateX(-50%);
+            opacity: 0.2;
+        }
+
+        .story-item {
+            position: relative;
+            width: 50%;
+            padding: 20px 40px;
+            box-sizing: border-box;
+        }
+
+        .story-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+        }
+
+        .story-item:nth-child(even) {
+            left: 50%;
+            text-align: left;
+        }
+
+        .story-content {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+            transition: transform 0.6s ease, opacity 0.6s ease;
+        }
+
+        .story-year {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-dorado);
+            font-weight: bold;
+        }
+
+        .story-content h3 {
+            font-family: 'Dancing Script';
+            font-size: 1.9rem;
+            color: var(--color-eucalipto);
+            margin: 10px 0;
+        }
+
+        .story-content p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Reveal inicial oculto */
+        .reveal-left,
+        .reveal-right {
+            opacity: 0;
+            transform: translateY(60px);
+        }
+
+        .reveal-left {
+            transform: translate(-26px, 60px);
+        }
+
+        .reveal-right {
+            transform: translate(26px, 60px);
+        }
+
+        /* Activo al hacer scroll */
+        .reveal-active {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+
+        /* Móvil */
+        @media (max-width: 768px) {
+            .story-timeline::before {
+                left: 20px;
+            }
+
+            .story-item {
+                width: 100%;
+                padding-left: 60px;
+                padding-right: 20px;
+                margin-bottom: 40px;
+                text-align: left !important;
+                left: 0 !important;
+            }
+
+            .story-title {
+                font-size: 2.6rem;
+                margin-bottom: 40px;
+            }
+        }
+
+        /* --- ESTILO PLANNING --- */
+        .timeline {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 50px 0;
+            position: relative;
+        }
+
+        .timeline-item {
+            flex: 1;
+            min-width: 150px;
+            padding: 20px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 120px;
+        }
+
+        .timeline-item i {
+            font-size: 2rem;
+            color: var(--color-eucalipto);
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .time {
+            font-weight: bold;
+            color: var(--color-dorado);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .event {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+        }
+
+        /* Tarjetas de Mapas */
+        .card-map {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            flex: 1;
+            min-width: 320px;
+            border-top: 5px solid var(--color-eucalipto);
+        }
+
+        .card-map iframe {
+            width: 100%;
+            height: 260px;
+            border: 0;
+            border-radius: 10px;
+        }
+
+        .btn-premium {
+            display: inline-block;
+            padding: 14px 30px;
+            background: var(--color-eucalipto);
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            margin-top: 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-premium:hover {
+            background: var(--color-acento);
+            transform: translateY(-2px);
+        }
+
+        .btn-premium.btn-disabled {
+            background: #cccccc;
+            cursor: default;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        /* Caja IBAN regalo */
+        .gift-iban-box {
+            background: white;
+            border: 1px dashed var(--color-eucalipto);
+            padding: 18px 20px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 18px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+        }
+
+        .gift-iban-code {
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: var(--color-eucalipto);
+            user-select: all;
+            font-size: 0.98rem;
+        }
+
+        .gift-iban-copy-btn {
+            padding: 8px 14px;
+            border-radius: 999px;
+            border: none;
+            background: var(--color-eucalipto);
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+            transition: background 0.2s ease, transform 0.15s ease;
+        }
+
+        .gift-iban-copy-btn:hover {
+            background: var(--color-acento);
+            transform: translateY(-1px);
+        }
+
+        .gift-iban-msg {
+            font-size: 0.8rem;
+            color: var(--color-acento);
+            margin-left: 6px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        /* Barra de progreso scroll */
+        .scroll-progress-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: transparent;
+            z-index: 3000;
+            pointer-events: none;
+        }
+
+        .scroll-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--color-eucalipto), var(--color-dorado));
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
+            transform-origin: left center;
+            transition: width 0.12s ease-out;
+        }
+
+        /* Botón fijo Confirmar asistencia (base oculto, solo móvil) */
+        #floating-confirm-btn {
+            position: fixed;
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
+            z-index: 2800;
+            padding: 14px 20px;
+            border-radius: 999px;
+            border: none;
+            background: var(--color-eucalipto);
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+            cursor: pointer;
+            display: none;
+        }
+
+        .calendar-btn {
+            margin-top: 35px;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+        }
+
+        /* Galería */
+        .gallery-grid {
+            margin-top: 32px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .gallery-thumb {
+            padding: 0;
+            border: none;
+            background: transparent;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+            transform: translateZ(0);
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .gallery-thumb:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.12);
+        }
+
+        .gallery-thumb img {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.35s ease;
+        }
+
+        .gallery-thumb:hover img {
+            transform: scale(1.04);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 18px;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(6px);
+            z-index: 4000;
+        }
+
+        .lightbox.open {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            width: min(980px, 100%);
+        }
+
+        .lightbox-img {
+            width: 100%;
+            max-height: 86vh;
+            object-fit: contain;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+            display: block;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 42px;
+            height: 42px;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.92);
+            color: #222;
+            font-size: 20px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 46px;
+            height: 46px;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.92);
+            color: #222;
+            font-size: 22px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+        }
+
+        .lightbox-prev {
+            left: 12px;
+        }
+
+        .lightbox-next {
+            right: 12px;
+        }
+
+        /* Pétalos sutiles al hacer scroll */
+        .petal-layer {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1200;
+        }
+
+        .petal {
+            position: absolute;
+            top: -40px;
+            width: var(--petal-size, 14px);
+            height: calc(var(--petal-size, 14px) * 0.72);
+            background: rgba(181, 157, 126, 0.18);
+            border-radius: 60% 40% 60% 40%;
+            transform: translate3d(0, 0, 0) rotate(var(--petal-rot, 0deg));
+            filter: blur(0.1px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+            opacity: var(--petal-opacity, 0.45);
+            animation: petal-fall var(--petal-dur, 7.5s) linear forwards;
+            will-change: transform, opacity;
+        }
+
+        .petal::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0) 55%);
+            border-radius: inherit;
+            transform: rotate(12deg);
+        }
+
+        @keyframes petal-fall {
+            0% {
+                transform: translate3d(0, -10px, 0) rotate(var(--petal-rot, 0deg));
+                opacity: 0;
+            }
+
+            10% {
+                opacity: var(--petal-opacity, 0.45);
+            }
+
+            100% {
+                transform: translate3d(var(--petal-drift, 60px), 110vh, 0) rotate(calc(var(--petal-rot, 0deg) + 260deg));
+                opacity: 0;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .petal-layer {
+                display: none;
+            }
+        }
+
+        /* Animación overlay para añadir al calendario */
+        .calendar-loading {
+            position: fixed;
+            inset: 0;
+            backdrop-filter: blur(6px);
+            background: rgba(0, 0, 0, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .calendar-loading.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .calendar-card {
+            background: white;
+            padding: 35px 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+            transform: translateY(20px) scale(0.95);
+            transition: transform 0.4s ease;
+        }
+
+        .calendar-loading.show .calendar-card {
+            transform: translateY(0) scale(1);
+        }
+
+        .calendar-spinner {
+            width: 38px;
+            height: 38px;
+            border: 3px solid #eee;
+            border-top: 3px solid var(--color-eucalipto);
+            border-radius: 50%;
+            margin: 0 auto 18px;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Formulario */
+        .form-container {
+            background: white;
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            max-width: 600px;
+            margin: 0 auto;
+            border: 1px solid #eee;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px 20px;
+            text-align: left;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        .checkbox-item input {
+            width: auto;
+            margin: 0;
+        }
+
+        /* Fuegos artificiales al enviar formulario */
+        .fireworks-container {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 2500;
+            overflow: hidden;
+        }
+
+        .firework-particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-dorado);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            animation: firework-burst 1.2s ease-out forwards;
+        }
+
+        /* Check animado al confirmar asistencia */
+        .check-overlay {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            pointer-events: none;
+            z-index: 2550;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+        }
+
+        .check-overlay.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .check-card {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 26px 32px;
+            border-radius: 999px;
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .check-circle {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--color-eucalipto);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.4rem;
+            animation: check-pop 0.4s ease-out;
+        }
+
+        .check-text {
+            font-weight: 600;
+            color: var(--color-texto);
+        }
+
+        @keyframes check-pop {
+            0% {
+                transform: scale(0.4);
+                opacity: 0;
+            }
+
+            60% {
+                transform: scale(1.05);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Botón flotante control música */
+        #music-toggle {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            width: 42px;
+            height: 42px;
+            border-radius: 999px;
+            border: none;
+            background: rgba(45, 76, 65, 0.9);
+            color: #fff;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+            z-index: 2600;
+            transition: background 0.2s ease, transform 0.15s ease, opacity 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        #music-toggle.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #music-toggle:hover {
+            background: rgba(134, 163, 151, 0.95);
+            transform: translateY(-1px);
+        }
+
+        /* WhatsApp flotante (contactos) */
+        .whatsapp-float {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            z-index: 2700;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+            pointer-events: none;
+        }
+
+        .whatsapp-btn {
+            width: 54px;
+            height: 54px;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            background: #25D366;
+            color: #fff;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+            transition: transform 0.15s ease, filter 0.2s ease;
+            pointer-events: auto;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-1px);
+            filter: brightness(0.98);
+        }
+
+        .whatsapp-panel {
+            width: min(320px, calc(100vw - 32px));
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 18px;
+            box-shadow: 0 18px 55px rgba(0, 0, 0, 0.14);
+            padding: 16px 16px 14px;
+            text-align: left;
+            opacity: 0;
+            transform: translateY(10px);
+            pointer-events: none;
+            transition: opacity 0.18s ease, transform 0.18s ease;
+            backdrop-filter: blur(6px);
+        }
+
+        .whatsapp-float.open .whatsapp-panel {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .wa-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .wa-title {
+            font-family: 'Dancing Script';
+            font-size: 1.8rem;
+            color: var(--color-eucalipto);
+            line-height: 1.1;
+        }
+
+        .wa-close {
+            width: 36px;
+            height: 36px;
+            border-radius: 999px;
+            border: none;
+            background: rgba(45, 76, 65, 0.08);
+            color: var(--color-eucalipto);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .wa-desc {
+            margin: 0 0 12px;
+            color: #555;
+            line-height: 1.45;
+            font-size: 0.95rem;
+        }
+
+        .wa-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .wa-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 12px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background: rgba(37, 211, 102, 0.12);
+            color: #128C7E;
+            border: 1px solid rgba(18, 140, 126, 0.18);
+            transition: transform 0.15s ease, background 0.2s ease;
+        }
+
+        .wa-link:hover {
+            transform: translateY(-1px);
+            background: rgba(37, 211, 102, 0.16);
+        }
+
+        @keyframes firework-burst {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(var(--dx), var(--dy)) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .envelope-wrapper {
+                padding: 0 10px;
+            }
+
+            .envelope {
+                width: 100%;
+                max-width: 340px;
+                height: 230px;
+            }
+
+            .envelope-front::before,
+            .envelope-front::after {
+                border-bottom-width: 150px;
+            }
+
+            .envelope-front::before {
+                border-right-width: 170px;
+            }
+
+            .envelope-front::after {
+                border-left-width: 170px;
+            }
+
+            .envelope-flap {
+                border-top-width: 150px;
+                border-left-width: 170px;
+                border-right-width: 170px;
+            }
+
+            .envelope-seal {
+                top: 115px;
+                min-width: 52px;
+                height: 52px;
+                font-size: 0.85rem;
+                padding: 0 8px;
+            }
+
+            .card-invitation {
+                width: calc(100% - 40px);
+                padding: 24px 22px;
+            }
+
+            .envelope.open .card-invitation {
+                transform: translate(-50%, -105%);
+            }
+
+            h1 {
+                font-size: 3.2rem;
+            }
+
+            /* Más aire general en móvil */
+            #main-content {
+                padding: 80px 16px;
+            }
+
+            .section {
+                margin: 170px auto;
+            }
+
+            /* Timeline vertical (más legible) */
+            .timeline {
+                flex-direction: column;
+                align-items: center;
+                gap: 14px;
+                margin: 32px 0 6px;
+            }
+
+            .timeline-item {
+                flex: none;
+                width: 100%;
+                max-width: 100%;
+                background: #fff;
+                border-radius: 14px;
+                padding: 14px 14px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            }
+
+            .time {
+                font-size: 0.95rem;
+            }
+
+            .event {
+                font-size: 1.4rem;
+            }
+
+            /* Botones más grandes (tap-friendly) */
+            .btn-premium {
+                padding: 16px 34px;
+                font-size: 1rem;
+                border-radius: 10px;
+            }
+
+            .calendar-btn {
+                width: 100%;
+                max-width: 420px;
+            }
+
+            /* Botón flotante música un poco más grande */
+            #music-toggle {
+                width: 48px;
+                height: 48px;
+                font-size: 1.3rem;
+                top: 14px;
+                right: 14px;
+            }
+
+            /* Botón y panel de WhatsApp, recolocados para no estorbar */
+            .whatsapp-float {
+                right: 14px;
+                top: 80px;
+                bottom: auto;
+            }
+
+            .whatsapp-btn {
+                width: 56px;
+                height: 56px;
+                font-size: 1.45rem;
+            }
+
+            /* Galería en móvil */
+            .gallery-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 12px;
+            }
+
+            .gallery-thumb img {
+                height: 160px;
+            }
+
+            /* Más espacio debajo del plano de mesas para que el botón no quede tapado por el de confirmar */
+            #plano-mesas-section {
+                margin-bottom: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="scroll-progress-wrapper">
+        <div id="scroll-progress-bar" class="scroll-progress-bar"></div>
+    </div>
+
+    <audio id="wedding-song" src="abcdefu.mp3" preload="auto" loop></audio>
+    <button id="music-toggle" aria-label="Silenciar música" title="Silenciar música">🔊</button>
+
+    <div id="whatsapp-float" class="whatsapp-float open">
+        <button id="wa-toggle" class="whatsapp-btn" type="button" aria-label="Cerrar contactos de WhatsApp"
+            title="Cerrar">💬</button>
+        <div id="wa-panel" class="whatsapp-panel" role="dialog" aria-label="Nuestros contactos" aria-hidden="false">
+            <div class="wa-header">
+                <div class="wa-title">Nuestros contactos</div>
+                <button id="wa-close" class="wa-close" type="button" aria-label="Cerrar">✕</button>
+            </div>
+            <p class="wa-desc">Si necesitas decirnos algo aquí están nuestros números.</p>
+            <div class="wa-actions">
+                <a href="https://wa.me/34608008978" target="_blank" rel="noopener noreferrer" class="wa-link">Iván</a>
+                <a href="https://wa.me/34691883708" target="_blank" rel="noopener noreferrer" class="wa-link">Nuria</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="lightbox" class="lightbox" aria-hidden="true">
+        <div class="lightbox-content" role="dialog" aria-label="Imagen ampliada">
+            <button type="button" class="lightbox-close" aria-label="Cerrar">✕</button>
+            <button type="button" class="lightbox-nav lightbox-prev" aria-label="Anterior">‹</button>
+            <button type="button" class="lightbox-nav lightbox-next" aria-label="Siguiente">›</button>
+            <img class="lightbox-img" alt="Imagen ampliada">
+        </div>
+    </div>
+
+    <!-- Botón fijo Confirmar asistencia (solo móvil) -->
+    <button type="button" id="floating-confirm-btn">
+        Confirmar asistencia
+    </button>
+
+    <div class="envelope-wrapper" id="wrapper">
+        <div class="envelope" id="envelope" onclick="openEnvelope()">
+            <div class="envelope-flap"></div>
+            <div class="envelope-front"></div>
+            <div class="envelope-seal" id="envelope-seal">I & N</div>
+            <div class="card-invitation">
+                <h2 id="card-invitation-title">¡Nos Casamos!</h2>
+                <div class="names">Iván & Nuria</div>
+                <p class="date">26 . 06 . 2027</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <header data-aos="fade-down">
+            <h1>Iván & Nuria</h1>
+            <p class="gran-dia">26 DE JUNIO DE 2027</p>
+            <div class="countdown-wrapper">
+                <div class="countdown-box">
+                    <span id="days" class="countdown-number">0</span>
+                    <span class="countdown-label">DÍAS</span>
+                </div>
+                <div class="countdown-box">
+                    <span id="hours" class="countdown-number">0</span>
+                    <span class="countdown-label">HORAS</span>
+                </div>
+                <div class="countdown-box">
+                    <span id="mins" class="countdown-number">0</span>
+                    <span class="countdown-label">MINUTOS</span>
+                </div>
+                <div class="countdown-box">
+                    <span id="secs" class="countdown-number">0</span>
+                    <span class="countdown-label">SEGUNDOS</span>
+                </div>
+            </div>
+            <button type="button" class="btn-premium calendar-btn" onclick="smartCalendar()">
+                📅 Añadir al calendario
+            </button>
+        </header>
+
+        <div class="section story-section">
+            <h2 class="story-title">
+                Nuestra Historia 💚
+            </h2>
+
+            <div class="story-timeline">
+
+                <div class="story-item reveal-left">
+                    <div class="story-content">
+                        <span class="story-year">El comienzo</span>
+                        <h3>Cuando todo empezó</h3>
+                        <p>
+                            Sin saberlo, aquel día marcó el inicio de algo que cambiaría nuestras vidas.
+                            Una conversación, una sonrisa y esa sensación de que algo especial estaba naciendo.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="story-item reveal-right">
+                    <div class="story-content">
+                        <span class="story-year">Momentos inolvidables</span>
+                        <h3>Risas y aventuras</h3>
+                        <p>
+                            Viajes improvisados, planes que salieron mejor de lo esperado
+                            y el apoyo incondicional en cada paso.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="story-item reveal-left">
+                    <div class="story-content">
+                        <span class="story-year">La gran pregunta 💍</span>
+                        <h3>Un “sí” para toda la vida</h3>
+                        <p>
+                            En el momento perfecto, en el lugar perfecto, llegó la pregunta
+                            que lo cambiaría todo… y la respuesta fue un “sí” lleno de emoción.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="story-item reveal-right">
+                    <div class="story-content">
+                        <span class="story-year">26 de Junio de 2027</span>
+                        <h3>El siguiente capítulo</h3>
+                        <p>
+                            Ahora queremos celebrar con vosotros el inicio de nuestra nueva etapa.
+                            Gracias por formar parte de nuestra historia.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="section" data-aos="fade-up">
+            <h2 style="font-family: 'Dancing Script'; font-size: 2.8rem; color: var(--color-eucalipto);">📸 Galería</h2>
+            <p>Una mini galería con algunas fotos bonitas.</p>
+
+            <div class="gallery-grid">
+                <button type="button" class="gallery-thumb" data-full="f1.jpeg" aria-label="Abrir foto 1">
+                    <img src="f1.jpeg" alt="Foto 1" loading="lazy">
+                </button>
+                <button type="button" class="gallery-thumb" data-full="f2.jpeg" aria-label="Abrir foto 2">
+                    <img src="f2.jpeg" alt="Foto 2" loading="lazy">
+                </button>
+                <button type="button" class="gallery-thumb" data-full="f3.jpeg" aria-label="Abrir foto 3">
+                    <img src="f3.jpeg" alt="Foto 3" loading="lazy">
+                </button>
+                <button type="button" class="gallery-thumb" data-full="f4.jpeg" aria-label="Abrir foto 4">
+                    <img src="f4.jpeg" alt="Foto 4" loading="lazy">
+                </button>
+                <button type="button" class="gallery-thumb" data-full="f5.jpeg" aria-label="Abrir foto 5">
+                    <img src="f5.jpeg" alt="Foto 5" loading="lazy">
+                </button>
+                <button type="button" class="gallery-thumb" data-full="f6.jpeg" aria-label="Abrir foto 6">
+                    <img src="f6.jpeg" alt="Foto 6" loading="lazy">
+                </button>
+            </div>
+        </div>
+
+        <div class="section" data-aos="fade-up">
+            <h2 style="font-family: 'Dancing Script'; font-size: 2.5rem; color: var(--color-eucalipto);">
+                📷 Álbum compartido
+            </h2>
+            <p>Después de la boda podrás subir aquí tus fotos favoritas para que todos podamos verlas.</p>
+            <a href="album.html" class="btn-premium" style="margin-top: 18px;">
+                Abrir álbum de fotos
+            </a>
+        </div>
+
+        <div class="section" data-aos="fade-up">
+            <h2 style="font-family: 'Dancing Script'; font-size: 3rem; color: var(--color-eucalipto);">Timeline del día
+            </h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span>⛪</span>
+                    <span class="time">13:00H</span>
+                    <span class="event">Ceremonia</span>
+                </div>
+                <div class="timeline-item">
+                    <span>🥂</span>
+                    <span class="time">14:30H</span>
+                    <span class="event">Cóctel</span>
+                </div>
+                <div class="timeline-item">
+                    <span>🍽️</span>
+                    <span class="time">16:00H</span>
+                    <span class="event">Banquete</span>
+                </div>
+                <div class="timeline-item">
+                    <span>💃</span>
+                    <span class="time">20:00H</span>
+                    <span class="event">Fiesta y Baile</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" data-aos="fade-up">
+            <h2 style="font-family: 'Dancing Script'; font-size: 3rem; color: var(--color-eucalipto);">¿Dónde nos vemos?
+            </h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; margin-top: 40px;">
+                <div class="card-map">
+                    <h3 style="font-family: 'Dancing Script'; font-size: 2rem;">⛪Ceremonia</h3>
+                    <p>Ermita de Nuestra Señora de los Remedios</p>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3043.2335021405365!2d-4.58928219250982!3d40.292774073459505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd40467159f1a18f%3A0x6208116ea7ee3e51!2sErmita%20Nuestra%20Se%C3%B1ora%20de%20los%20Remedios!5e0!3m2!1ses!2ses!4v1772467146818!5m2!1ses!2ses"
+                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <a href="https://maps.app.goo.gl/yg7W6ejZNtKeHVqU8" target="_blank" class="btn-premium">MAPS</a>
+                </div>
+                <div class="card-map">
+                    <h3 style="font-family: 'Dancing Script'; font-size: 2rem;">🍴Banquete</h3>
+                    <p>Finca La Cabaña</p>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3042.4688290406557!2d-4.659024623479326!3d40.30975146214264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4043ee35250981%3A0x1d3a0b92e9446449!2sComplejo%20Tur%C3%ADstico%20La%20Caba%C3%B1a!5e0!3m2!1ses!2ses!4v1772464832762!5m2!1ses!2ses"
+                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <a href="https://maps.app.goo.gl/oi8AyMj2UqSt2MgW7" target="_blank" class="btn-premium">MAPS</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" data-aos="fade-up">
+            <h2 style="font-family: 'Dancing Script'; font-size: 2.5rem; color: var(--color-eucalipto);">
+                🎧 Playlist de la Boda
+            </h2>
+            <p>¡Añade la canción que te hará darlo todo en la pista! 💃🔥</p>
+
+            <div
+                style="background:white; padding:40px; border-radius:20px; box-shadow:0 15px 50px rgba(0,0,0,0.05); max-width:700px; margin:30px auto 0;">
+                <iframe data-testid="embed-iframe" style="border-radius:12px"
+                    src="https://open.spotify.com/embed/playlist/1VR8LlNxhrrr3WjflKEWsp?utm_source=generator&theme=0"
+                    width="100%" height="352" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"></iframe>
+
+                <a href="https://open.spotify.com/playlist/1VR8LlNxhrrr3WjflKEWsp" target="_blank" class="btn-premium"
+                    style="margin-top: 22px;">
+                    🎶 Abrir en Spotify
+                </a>
+
+                <p style="margin: 18px 0 0; color: #555; line-height: 1.55;">
+                    Solo canciones para la fiesta 🔥<br>
+                    Nada de baladas tristes 😅, Que siempre aparece el típico que mete 12 canciones de llorar 🤣
+                </p>
+            </div>
+        </div>
+
+        <div id="confirmar-asistencia" class="section" data-aos="zoom-in"
+            style="background: white; padding: 40px; border-radius: 30px; box-shadow: 0 15px 50px rgba(0,0,0,0.05); max-width: 650px;">
+            <h2 style="font-family: 'Dancing Script'; font-size: 3rem; color: var(--color-dorado);">📝 Confirmar
+                Asistencia</h2>
+            <form id="wedding-form">
+                <div class="form-group">
+                    <label>👤 Nombre y Apellidos</label>
+                    <input type="text" id="guest-input" name="Nombre" required>
+                </div>
+                <div class="form-group">
+                    <label>✅ ¿Contamos contigo?</label>
+                    <select name="Asistencia" required>
+                        <option value="Sí">¡Sí, allí estaré!</option>
+                        <option value="No">Lo siento, no podré ir</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>👥 ¿Traes acompañantes?</label>
+                    <select id="has-partner" name="Acompañante_SiNo" onchange="togglePartner()">
+                        <option value="No">No</option>
+                        <option value="Sí">Sí</option>
+                    </select>
+                </div>
+                <div id="partner-details"
+                    style="display:none; background: #fdfaf5; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                    <div class="form-group">
+                        <label>👥 ¿Cuántos acompañantes?</label>
+                        <input type="number" name="Num_Acompañantes" value="1" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label>📝 Nombres de acompañantes</label>
+                        <input type="text" name="Nombres_Acompañantes">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>🍽️ Preferencias Alimentarias (puedes elegir varias)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item"><input type="checkbox" name="Preferencia" value="Ninguna"><span>🙂
+                                Ninguna</span></div>
+                        <div class="checkbox-item"><input type="checkbox" name="Preferencia" value="Celíaco"><span>🌾🚫
+                                Celíaco</span></div>
+                        <div class="checkbox-item"><input type="checkbox" name="Preferencia" value="Vegano"><span>🌱
+                                Vegano</span></div>
+                        <div class="checkbox-item"><input type="checkbox" name="Preferencia"
+                                value="Vegetariano"><span>🥦 Vegetariano</span></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>⚠️ Otras Alergias / Notas</label>
+                    <input type="text" name="Alergias">
+                </div>
+                <div class="form-group">
+                    <label>🚌 ¿Necesitas plaza de Autobús?</label>
+                    <select id="bus-select" name="Autobus" onchange="toggleBusDetails()">
+                        <option value="No">No</option>
+                        <option value="Sí">Sí</option>
+                    </select>
+                </div>
+                <div id="bus-details"
+                    style="display:none; background:#fdfaf5; padding:20px; border-radius:10px; margin-bottom:20px;">
+                    <p style="margin-top:0; font-weight:bold;">🚌 Más detalle del autobús</p>
+                    <ul style="text-align:left; padding-left: 1.2rem; margin: 10px 0 0; list-style: none;">
+                        <li>📍Salida de Navahondilla 12:00</li>
+                        <li>🚌 Salida hacia el banquete desde parada Pequeño Luchador 14:00</li>
+                        <li>🏡Primer bus de vuelta 22:00</li>
+                        <li>🏡Segundo bus de vuelta 1:00</li>
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <label>🎵 ¿Qué canción te haría bailar?</label>
+                    <input type="text" name="Cancion">
+                </div>
+                <button type="submit" id="submit-btn" class="btn-premium" style="width:100%">ENVIAR
+                    CONFIRMACIÓN</button>
+            </form>
+            <div id="success-msg" style="display:none; padding:30px;">
+                <h3 style="font-family:'Dancing Script'; font-size: 2.5rem; color: var(--color-dorado);">¡Muchas
+                    Gracias! ✨</h3>
+                <p>Tu respuesta se ha guardado.</p>
+            </div>
+        </div>
+
+        <div class="section" data-aos="fade-up">
+            <h2 style="font-family: 'Dancing Script'; font-size: 2.5rem; color: var(--color-eucalipto);">🎁 Regalo</h2>
+            <p>Vuestra presencia es lo más importante. Pero si queréis tener un detalle con nosotros:</p>
+            <div class="gift-iban-box">
+                <span id="gift-iban" class="gift-iban-code">
+                    ES00 0000 0000 0000 0000 0000
+                </span>
+                <button type="button" class="gift-iban-copy-btn" id="gift-iban-copy-btn">
+                    📋 Copiar
+                </button>
+                <span class="gift-iban-msg" id="gift-iban-msg">Copiado ✔</span>
+            </div>
+        </div>
+
+        <div id="plano-mesas-section" class="section" data-aos="fade-up">
+            <h2 style="font-family: 'Dancing Script'; font-size: 2.5rem; color: var(--color-eucalipto);">
+                🪑 Plano de Mesas
+            </h2>
+            <p>Hemos preparado un plano interactivo para que puedas consultar tu mesa por nombre.</p>
+            <a id="mesas-link" class="btn-premium btn-disabled" style="margin-top: 12px;">
+                No disponible hasta el día de la boda
+            </a>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        // Si venimos de la página de mesas, saltar animación del sobre y mostrar directamente el contenido
+        (function skipEnvelopeIfComingFromTables() {
+            try {
+                const shouldSkip = localStorage.getItem('skipEnvelopeOnce') === '1';
+                if (!shouldSkip) return;
+                localStorage.removeItem('skipEnvelopeOnce');
+            } catch (err) {
+                return;
+            }
+
+            const wrapper = document.getElementById('wrapper');
+            const content = document.getElementById('main-content');
+            if (!wrapper || !content) return;
+
+            wrapper.classList.add('hidden');
+            content.style.display = 'block';
+            content.style.opacity = '1';
+
+            const floatingBtn = document.getElementById('floating-confirm-btn');
+            if (floatingBtn && window.innerWidth <= 768) {
+                floatingBtn.style.display = 'block';
+            }
+        })();
+
+        // Modo día / noche automático (según hora local del visitante)
+        (function autoNightMode() {
+            const now = new Date();
+            const hour = now.getHours();
+            // Noche aproximada: de 20:00 a 7:59
+            if (hour >= 20 || hour < 8) {
+                document.body.classList.add('night-mode');
+            }
+        })();
+
+        /* === Reveal Scroll Effect (Nuestra Historia) === */
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.reveal-left, .reveal-right');
+
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('reveal-active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        function personalizeGuest() {
+            const params = new URLSearchParams(window.location.search);
+            const guest = params.get('invitado');
+
+            if (guest) {
+                const decodedName = decodeURIComponent(guest);
+
+                // 1) Personalizar sello del sobre
+                const seal = document.getElementById('envelope-seal');
+                if (seal) {
+                    const shortName = decodedName.length > 12
+                        ? decodedName.substring(0, 12) + "…"
+                        : decodedName;
+
+                    seal.textContent = shortName;
+                }
+
+                // 2) Personalizar texto de la carta
+                const cardTitle = document.getElementById('card-invitation-title');
+                if (cardTitle) {
+                    cardTitle.textContent = `${decodedName}, nos casamos 💚`;
+                }
+
+                // 3) Autorrellenar formulario
+                const input = document.getElementById('guest-input');
+                if (input) {
+                    input.value = decodedName;
+                    input.style.backgroundColor = "#f5f5f5";
+                    input.style.fontWeight = "bold";
+                }
+
+                // 4) Personalizar header principal
+                const mainHeader = document.querySelector('#main-content header h1');
+                if (mainHeader) {
+                    mainHeader.textContent = `${decodedName}, queremos celebrar contigo 💚`;
+                }
+
+                // 5) Personalizar botones de confirmación
+                const submitBtn = document.getElementById('submit-btn');
+                if (submitBtn) {
+                    submitBtn.textContent = `Confirmar asistencia, ${decodedName}`;
+                }
+                const floatingBtn = document.getElementById('floating-confirm-btn');
+                if (floatingBtn) {
+                    floatingBtn.textContent = `Confirmar asistencia, ${decodedName}`;
+                }
+            }
+        }
+
+        function getInviteStorageKey() {
+            try {
+                const params = new URLSearchParams(window.location.search);
+                const invitado = params.get('invitado');
+                if (invitado) {
+                    return 'formSubmitted_invitado_' + invitado;
+                }
+                const input = document.getElementById('guest-input');
+                if (input && input.value.trim()) {
+                    return 'formSubmitted_nombre_' + input.value.trim().toLowerCase();
+                }
+            } catch (e) { }
+            return null;
+        }
+
+        function applyFormSubmittedState() {
+            const formEl = document.getElementById('wedding-form');
+            const successEl = document.getElementById('success-msg');
+            if (!formEl || !successEl) return;
+
+            const key = getInviteStorageKey();
+            if (!key) return;
+
+            try {
+                if (localStorage.getItem(key) === '1') {
+                    formEl.style.display = 'none';
+                    successEl.style.display = 'block';
+                }
+            } catch (e) { }
+        }
+
+        window.addEventListener('load', () => {
+            personalizeGuest();
+            applyFormSubmittedState();
+        });
+
+        function enableMesasLink() {
+            const link = document.getElementById('mesas-link');
+            if (!link) return;
+
+            link.classList.remove('btn-disabled');
+
+            const baseHref = 'mesas.html';
+            const search = window.location.search;
+            const href = search ? baseHref + search : baseHref;
+
+            link.href = href;
+            link.textContent = 'Abrir plano de mesas';
+        }
+
+        /* Pétalos suaves al hacer scroll (muy sutil) */
+        (function setupPetalsOnScroll() {
+            const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (reduceMotion) return;
+
+            const layer = document.createElement('div');
+            layer.className = 'petal-layer';
+            document.body.appendChild(layer);
+
+            let lastSpawnAt = 0;
+            let lastScrollY = window.scrollY || 0;
+
+            function spawnPetal(intensity = 1) {
+                const p = document.createElement('div');
+                p.className = 'petal';
+
+                const size = 10 + Math.random() * 10; // 10-20px
+                const left = Math.random() * 100; // vw
+                const drift = (Math.random() * 140 - 70).toFixed(0) + 'px';
+                const rot = (Math.random() * 360).toFixed(0) + 'deg';
+                const dur = (6.6 + Math.random() * 3.6 + intensity * 0.4).toFixed(2) + 's';
+                const opacity = (0.22 + Math.random() * 0.22).toFixed(2);
+
+                p.style.left = left + 'vw';
+                p.style.setProperty('--petal-size', size + 'px');
+                p.style.setProperty('--petal-drift', drift);
+                p.style.setProperty('--petal-rot', rot);
+                p.style.setProperty('--petal-dur', dur);
+                p.style.setProperty('--petal-opacity', opacity);
+
+                layer.appendChild(p);
+
+                const cleanupMs = Math.ceil(parseFloat(dur) * 1000) + 200;
+                setTimeout(() => p.remove(), cleanupMs);
+            }
+
+            function onScroll() {
+                const now = Date.now();
+                const y = window.scrollY || 0;
+                const delta = Math.abs(y - lastScrollY);
+                lastScrollY = y;
+
+                if (delta < 12) return;
+                if (now - lastSpawnAt < 220) return;
+
+                const chance = Math.min(0.22, 0.06 + delta / 900);
+                if (Math.random() > chance) return;
+
+                lastSpawnAt = now;
+                spawnPetal(delta > 140 ? 2 : 1);
+                if (delta > 220 && Math.random() < 0.35) spawnPetal(1);
+
+                const maxPetals = 18;
+                while (layer.childElementCount > maxPetals) {
+                    layer.firstElementChild?.remove();
+                }
+            }
+
+            window.addEventListener('scroll', onScroll, { passive: true });
+        })();
+
+        // WhatsApp flotante (contactos)
+        (function setupWhatsAppFloat() {
+            const wrap = document.getElementById('whatsapp-float');
+            const panel = document.getElementById('wa-panel');
+            const toggle = document.getElementById('wa-toggle');
+            const closeBtn = document.getElementById('wa-close');
+            if (!wrap || !panel || !toggle || !closeBtn) return;
+
+            function open() {
+                wrap.classList.add('open');
+                panel.setAttribute('aria-hidden', 'false');
+                toggle.setAttribute('aria-label', 'Cerrar contactos de WhatsApp');
+                toggle.setAttribute('title', 'Cerrar');
+            }
+
+            function close() {
+                wrap.classList.remove('open');
+                panel.setAttribute('aria-hidden', 'true');
+                toggle.setAttribute('aria-label', 'Abrir contactos de WhatsApp');
+                toggle.setAttribute('title', 'WhatsApp');
+            }
+
+            toggle.addEventListener('click', () => {
+                if (wrap.classList.contains('open')) close();
+                else open();
+            });
+            closeBtn.addEventListener('click', close);
+
+            document.addEventListener('keydown', (e) => {
+                if (!wrap.classList.contains('open')) return;
+                if (e.key === 'Escape') close();
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!wrap.classList.contains('open')) return;
+                const target = e.target;
+                if (!(target instanceof Node)) return;
+                if (wrap.contains(target)) return;
+                close();
+            });
+
+            // Arranca abierto solo en pantallas grandes; en móvil se queda cerrado para no molestar
+            if (window.innerWidth > 768) {
+                open();
+            } else {
+                close();
+            }
+        })();
+
+        // Galería (lightbox)
+        (function setupGallery() {
+            const thumbs = Array.from(document.querySelectorAll('.gallery-thumb'));
+            const lightbox = document.getElementById('lightbox');
+            if (!thumbs.length || !lightbox) return;
+
+            const imgEl = lightbox.querySelector('.lightbox-img');
+            const closeBtn = lightbox.querySelector('.lightbox-close');
+            const prevBtn = lightbox.querySelector('.lightbox-prev');
+            const nextBtn = lightbox.querySelector('.lightbox-next');
+
+            let currentIndex = 0;
+
+            function openAt(index) {
+                currentIndex = (index + thumbs.length) % thumbs.length;
+                const full = thumbs[currentIndex].getAttribute('data-full') || '';
+                imgEl.src = full;
+                lightbox.classList.add('open');
+                lightbox.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function close() {
+                lightbox.classList.remove('open');
+                lightbox.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+                imgEl.src = '';
+            }
+
+            thumbs.forEach((btn, idx) => {
+                btn.addEventListener('click', () => openAt(idx));
+            });
+
+            closeBtn.addEventListener('click', close);
+            prevBtn.addEventListener('click', () => openAt(currentIndex - 1));
+            nextBtn.addEventListener('click', () => openAt(currentIndex + 1));
+
+            // Click fuera de la imagen cierra
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) close();
+            });
+
+            // Teclado: ESC cierra, flechas navegan
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('open')) return;
+                if (e.key === 'Escape') close();
+                if (e.key === 'ArrowLeft') openAt(currentIndex - 1);
+                if (e.key === 'ArrowRight') openAt(currentIndex + 1);
+            });
+        })();
+
+        function smartCalendar() {
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+            const isAndroid = /Android/.test(navigator.userAgent);
+
+            showCalendarAnimation();
+
+            setTimeout(() => {
+                if (isIOS) {
+                    window.location.href = "webcal://isaanchezz.github.io/nuestra-boda/boda-ivan-nuria.ics";
+                    return;
+                }
+
+                if (isAndroid) {
+                    const googleUrl = "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+                        "&text=Boda+de+Iván+y+Nuria" +
+                        "&dates=20270626T130000/20270626T230000" +
+                        "&details=Ceremonia:+Ermita+de+Nuestra+Señora+de+los+Remedios.+Banquete:+Finca+La+Cabaña." +
+                        "&location=Ermita+Nuestra+Señora+de+los+Remedios";
+
+                    window.open(googleUrl, "_blank");
+                    return;
+                }
+
+                // Escritorio
+                window.location.href = "boda-ivan-nuria.ics";
+
+            }, 900);
+        }
+
+        // Ajuste del texto del botón de calendario según el dispositivo
+        (function setupCalendarButtonLabel() {
+            const btn = document.querySelector('.calendar-btn');
+            if (!btn) return;
+
+            const ua = navigator.userAgent || '';
+            const isIOS = /iPad|iPhone|iPod/.test(ua);
+            const isAndroid = /Android/.test(ua);
+
+            if (isIOS) {
+                btn.textContent = '📆 Añadir a Calendario (iPhone)';
+            } else if (isAndroid) {
+                btn.textContent = '📆 Añadir a Google Calendar';
+            } else {
+                btn.textContent = '📅 Descargar evento (PC)';
+            }
+        })();
+
+        function showCalendarAnimation() {
+            const overlay = document.createElement('div');
+            overlay.className = 'calendar-loading';
+
+            overlay.innerHTML = `
+                <div class="calendar-card">
+                    <div class="calendar-spinner"></div>
+                    <div style="font-family:'Dancing Script'; font-size:1.8rem; color:var(--color-eucalipto);">
+                        Preparando tu evento 💚
+                    </div>
+                    <div style="margin-top:10px; color:#777;">
+                        Abriendo calendario...
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(overlay);
+
+            setTimeout(() => overlay.classList.add('show'), 10);
+
+            setTimeout(() => {
+                overlay.classList.remove('show');
+                setTimeout(() => overlay.remove(), 400);
+            }, 1800);
+        }
+
+        function togglePartner() {
+            const val = document.getElementById('has-partner').value;
+            document.getElementById('partner-details').style.display = (val === 'Sí') ? 'block' : 'none';
+        }
+
+        function toggleBusDetails() {
+            const select = document.getElementById('bus-select');
+            const details = document.getElementById('bus-details');
+            if (!select || !details) return;
+            details.style.display = (select.value === 'Sí') ? 'block' : 'none';
+        }
+
+        function openEnvelope() {
+            const song = document.getElementById('wedding-song');
+            song.volume = 0.03;
+            song.play().catch(() => { });
+
+            const envelope = document.getElementById('envelope');
+            const card = envelope.querySelector('.card-invitation');
+            const musicToggle = document.getElementById('music-toggle');
+            const wrapper = document.getElementById('wrapper');
+
+            // 1) abrir el sobre y hacer que la carta salga hacia arriba
+            envelope.classList.add('open');
+            // mostrar control de música cuando empieza a sonar
+            if (musicToggle) {
+                musicToggle.classList.add('visible');
+            }
+
+            // 2) cuando ha terminado de salir del sobre, colocarla en el centro de la pantalla
+            setTimeout(() => {
+                card.classList.add('card-centered');
+            }, 900);
+
+            // 3) dejar la carta un momento en el centro y luego animarla hacia la parte superior simulando que se convierte en el header
+            setTimeout(() => {
+                card.classList.add('card-to-header');
+            }, 2900);
+
+            // 4) desvanecer el sobre con blur y mostrar el contenido principal
+            setTimeout(() => {
+                if (wrapper) {
+                    wrapper.classList.add('hidden');
+                }
+                const content = document.getElementById('main-content');
+                content.style.display = 'block';
+                setTimeout(() => content.style.opacity = '1', 100);
+
+                // mostrar botón fijo de Confirmar asistencia solo después de entrar en la página (móvil)
+                const floatingBtn = document.getElementById('floating-confirm-btn');
+                if (floatingBtn && window.innerWidth <= 768) {
+                    floatingBtn.style.display = 'block';
+                }
+            }, 2200);
+        }
+
+        // Contador hasta la boda (26 junio 2027, 13:00)
+        const weddingDate = new Date("Jun 26, 2027 13:00:00").getTime();
+        const countdownInterval = setInterval(() => {
+            const now = new Date().getTime();
+            const d = weddingDate - now;
+
+            const daysEl = document.getElementById("days");
+            const hoursEl = document.getElementById("hours");
+            const minsEl = document.getElementById("mins");
+            const secsEl = document.getElementById("secs");
+
+            if (!daysEl || !hoursEl || !minsEl || !secsEl) return;
+
+            if (d <= 0) {
+                clearInterval(countdownInterval);
+                daysEl.innerText = "0";
+                hoursEl.innerText = "0";
+                minsEl.innerText = "0";
+                secsEl.innerText = "0";
+
+                const wrapper = document.querySelector('.countdown-wrapper');
+                if (wrapper) {
+                    wrapper.classList.add('celebrate');
+                    setTimeout(() => wrapper.classList.remove('celebrate'), 1800);
+                }
+
+                // Activar botón del plano de mesas cuando llega el día
+                enableMesasLink();
+                return;
+            }
+
+            daysEl.innerText = Math.floor(d / (1000 * 60 * 60 * 24));
+            hoursEl.innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            minsEl.innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
+            secsEl.innerText = Math.floor((d % (1000 * 60)) / 1000);
+        }, 1000);
+
+        function launchFireworks() {
+            const container = document.createElement('div');
+            container.className = 'fireworks-container';
+            document.body.appendChild(container);
+
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+
+            const bursts = 4;
+            const particlesPerBurst = 25;
+            const colors = ['#b59d7e', '#ffffff', '#f9f7f2', '#86a397'];
+
+            for (let i = 0; i < bursts; i++) {
+                const centerX = Math.random() * width * 0.8 + width * 0.1;
+                const centerY = Math.random() * height * 0.4 + height * 0.1;
+
+                for (let j = 0; j < particlesPerBurst; j++) {
+                    const p = document.createElement('div');
+                    p.className = 'firework-particle';
+
+                    const angle = (Math.PI * 2 * j) / particlesPerBurst;
+                    const distance = 80 + Math.random() * 60;
+                    const dx = Math.cos(angle) * distance;
+                    const dy = Math.sin(angle) * distance;
+
+                    p.style.left = `${centerX}px`;
+                    p.style.top = `${centerY}px`;
+                    p.style.setProperty('--dx', `${dx}px`);
+                    p.style.setProperty('--dy', `${dy}px`);
+                    p.style.backgroundColor = colors[(i + j) % colors.length];
+
+                    container.appendChild(p);
+                }
+            }
+
+            setTimeout(() => {
+                container.remove();
+            }, 1500);
+        }
+
+        // Control de música flotante
+        (function setupMusicToggle() {
+            const song = document.getElementById('wedding-song');
+            const musicToggle = document.getElementById('music-toggle');
+            if (!song || !musicToggle) return;
+
+            musicToggle.addEventListener('click', () => {
+                if (song.paused) {
+                    song.play().then(() => {
+                        musicToggle.textContent = '🔊';
+                        musicToggle.setAttribute('aria-label', 'Silenciar música');
+                        musicToggle.setAttribute('title', 'Silenciar música');
+                    }).catch(() => { });
+                } else {
+                    song.pause();
+                    musicToggle.textContent = '🔇';
+                    musicToggle.setAttribute('aria-label', 'Reanudar música');
+                    musicToggle.setAttribute('title', 'Reanudar música');
+                }
+            });
+        })();
+
+        // Vibración suave solo en móvil (si el dispositivo lo soporta)
+        function isMobileDevice() {
+            const ua = navigator.userAgent || '';
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua);
+        }
+
+        function softVibrate() {
+            if (!('vibrate' in navigator)) return;
+            if (!isMobileDevice()) return;
+            navigator.vibrate(40);
+        }
+
+        function showCheckAnimation() {
+            const overlay = document.createElement('div');
+            overlay.className = 'check-overlay';
+            overlay.innerHTML = `
+                <div class="check-card">
+                    <div class="check-circle">✔</div>
+                    <div class="check-text">Confirmación enviada</div>
+                </div>
+            `;
+
+            document.body.appendChild(overlay);
+
+            requestAnimationFrame(() => {
+                overlay.classList.add('show');
+            });
+
+            setTimeout(() => {
+                overlay.classList.remove('show');
+                setTimeout(() => overlay.remove(), 250);
+            }, 1500);
+        }
+
+        // Envío Formulario Nativo
+        const form = document.getElementById('wedding-form');
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            btn.disabled = true; btn.innerText = "Guardando...";
+
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbwMOYv9vtDvTXGz30hq0le7UASZDyEEvy8ndIP2l4bglntfgIqhwogcP2ksH5OB7HTtnA/exec';
+
+            const formData = new FormData(form);
+            const preferences = formData.getAll('Preferencia').join(', ');
+            formData.set('Preferencia', preferences);
+
+            fetch(scriptURL, { method: 'POST', body: formData })
+                .then(() => {
+                    softVibrate();
+                    launchFireworks();
+                    showCheckAnimation();
+                    form.style.display = 'none';
+                    document.getElementById('success-msg').style.display = 'block';
+                    // Marcar invitación como enviada en este navegador
+                    try {
+                        const key = getInviteStorageKey();
+                        if (key) {
+                            localStorage.setItem(key, '1');
+                        }
+                    } catch (e) { }
+                })
+                .catch(() => {
+                    alert('Error al enviar. Inténtalo de nuevo.');
+                    btn.disabled = false; btn.innerText = "ENVIAR CONFIRMACIÓN";
+                });
+        });
+
+        // Copiar IBAN regalo
+        (function setupGiftIbanCopy() {
+            const btn = document.getElementById('gift-iban-copy-btn');
+            const ibanEl = document.getElementById('gift-iban');
+            const msgEl = document.getElementById('gift-iban-msg');
+            if (!btn || !ibanEl || !msgEl) return;
+
+            const iban = ibanEl.textContent.replace(/\s+/g, '');
+
+            function showMessage() {
+                msgEl.style.opacity = '1';
+                clearTimeout(msgEl._hideTimeout);
+                msgEl._hideTimeout = setTimeout(() => {
+                    msgEl.style.opacity = '0';
+                }, 1800);
+            }
+
+            async function copyIban() {
+                try {
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        await navigator.clipboard.writeText(iban);
+                    } else {
+                        const area = document.createElement('textarea');
+                        area.value = iban;
+                        area.style.position = 'fixed';
+                        area.style.opacity = '0';
+                        document.body.appendChild(area);
+                        area.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(area);
+                    }
+                    showMessage();
+                } catch (e) {
+                    alert('No se pudo copiar. Puedes copiarlo manualmente.');
+                }
+            }
+
+            btn.addEventListener('click', copyIban);
+        })();
+
+        // Botón fijo Confirmar asistencia (scroll al formulario)
+        (function setupFloatingConfirm() {
+            const btn = document.getElementById('floating-confirm-btn');
+            const target = document.getElementById('confirmar-asistencia');
+            if (!btn || !target) return;
+
+            btn.addEventListener('click', () => {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        })();
+
+        // Barra de progreso de scroll
+        (function setupScrollProgress() {
+            const bar = document.getElementById('scroll-progress-bar');
+            if (!bar) return;
+
+            function update() {
+                const doc = document.documentElement;
+                const scrollTop = window.pageYOffset || doc.scrollTop || 0;
+                const scrollHeight = doc.scrollHeight - doc.clientHeight;
+                const ratio = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
+                bar.style.width = `${Math.min(100, Math.max(0, ratio * 100))}%`;
+            }
+
+            window.addEventListener('scroll', update, { passive: true });
+            window.addEventListener('resize', update);
+            window.addEventListener('load', update);
+        })();
+    </script>
+</body>
+
+</html>
