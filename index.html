@@ -1,0 +1,173 @@
+<!-- =====================================================
+   HEADER – Nombre de los novios y hero image
+   ===================================================== -->
+<header class="bg-dark text-white text-center py-5">
+  <div class="container position-relative">
+    <h1 class="display-4">María &amp; Juan</h1>
+    <!-- Hero Image (full width, cover) -->
+    <img src="hero-image.jpg"
+         alt="Los novios"
+         class="w-100 rounded shadow-lg mt-4"
+         style="object-fit:cover;height:400px;">
+  </div>
+</header>
+
+<!-- =====================================================
+   SOBRE NOSOTROS – Dos párrafos cortos
+   ===================================================== -->
+<section id="sobre-nosotros" class="py-5">
+  <div class="container">
+    <h2>Sobre Nosotros</h2>
+    <p>
+      María es ingeniera de software con pasión por la fotografía, y Juan es diseñador gráfico que ama la naturaleza.
+    </p>
+    <p>
+      Desde nuestro primer encuentro en un café de Madrid, hemos construido una historia llena de aventuras y sueños compartidos.
+    </p>
+  </div>
+</section>
+
+<!-- =====================================================
+   DETALLES DE LA CIERMO – Fecha, hora, lugar y Google Maps
+   ===================================================== -->
+<section id="detalles-ceremonia" class="bg-light py-5">
+  <div class="container">
+    <h2>Detalles de la Ceremonia</h2>
+    <dl class="row">
+      <dt class="col-sm-3">Fecha:</dt>
+      <dd class="col-sm-9">15 de septiembre de 2026</dd>
+
+      <dt class="col-sm-3">Hora:</dt>
+      <dd class="col-sm-9">17:00 hrs</dd>
+
+      <dt class="col-sm-3">Lugar:</dt>
+      <dd class="col-sm-9">Iglesia de San Juan, Calle Mayor 10, Madrid</dd>
+
+      <dt class="col-sm-3">Mapa:</dt>
+      <dd class="col-sm-9">
+        <a href="https://goo.gl/maps/your-location" target="_blank">
+          Ver en Google Maps
+        </a>
+      </dd>
+    </dl>
+  </div>
+</section>
+
+<!-- =====================================================
+   RSVP – Formulario simple (no envío)
+   ===================================================== -->
+<section id="rsvp" class="py-5">
+  <div class="container">
+    <h2>RSVP</h2>
+    <form>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="nombre" class="form-label">Nombre completo</label>
+          <input type="text"
+                 id="nombre"
+                 class="form-control"
+                 placeholder="Tu nombre">
+        </div>
+
+        <div class="col-md-6">
+          <label for="correo" class="form-label">Correo electrónico</label>
+          <input type="email"
+                 id="correo"
+                 class="form-control"
+                 placeholder="tu@email.com">
+        </div>
+
+        <div class="col-12">
+          <label for="acompañantes" class="form-label">Número de acompañantes</label>
+          <input type="number"
+                 id="acompañantes"
+                 class="form-control"
+                 min="0"
+                 placeholder="0">
+        </div>
+
+        <!-- Botón sin funcionalidad real -->
+        <div class="col-12 text-center mt-3">
+          <button type="submit" class="btn btn-primary" disabled>
+            Enviar RSVP (no funciona)
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- =====================================================
+   GALERÍA – 4 imágenes con efecto Lightbox
+   ===================================================== -->
+<section id="galeria" class="bg-dark text-white py-5">
+  <div class="container">
+    <h2>Galería</h2>
+    <div class="row g-3 mt-3">
+      <!-- Imagen 1 -->
+      <div class="col-6 col-md-3">
+        <a href="#" data-bs-toggle="modal" data-bs-target="#lightboxModal1">
+          <img src="galeria1_thumb.jpg"
+               alt="Foto 1"
+               class="img-fluid rounded shadow">
+        </a>
+      </div>
+
+      <!-- Imagen 2 -->
+      <div class="col-6 col-md-3">
+        <a href="#" data-bs-toggle="modal" data-bs-target="#lightboxModal2">
+          <img src="galeria2_thumb.jpg"
+               alt="Foto 2"
+               class="img-fluid rounded shadow">
+        </a>
+      </div>
+
+      <!-- Imagen 3 -->
+      <div class="col-6 col-md-3">
+        <a href="#" data-bs-toggle="modal" data-bs-target="#lightboxModal3">
+          <img src="galeria3_thumb.jpg"
+               alt="Foto 3"
+               class="img-fluid rounded shadow">
+        </a>
+      </div>
+
+      <!-- Imagen 4 -->
+      <div class="col-6 col-md-3">
+        <a href="#" data-bs-toggle="modal" data-bs-target="#lightboxModal4">
+          <img src="galeria4_thumb.jpg"
+               alt="Foto 4"
+               class="img-fluid rounded shadow">
+        </a>
+      </div>
+    </div>
+
+    <!-- Modal Lightbox para la imagen 1 -->
+    <div class="modal fade" id="lightboxModal1" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content bg-dark border-0">
+          <button type="button"
+                  class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
+                  data-bs-dismiss="modal" aria-label="Close"></button>
+          <img src="galeria1.jpg"
+               alt="Foto 1 ampliada"
+               class="w-100">
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Lightbox para la imagen 2 -->
+    <div class="modal fade" id="lightboxModal2" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content bg-dark border-0">
+          <button type="button"
+                  class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
+                  data-bs-dismiss="modal" aria-label="Close"></button>
+          <img src="galeria2.jpg"
+               alt="Foto 2 ampliada"
+               class="w-100">
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Lightbox para la imagen 3 -->
+    <div class="modal fade" id="lightboxModal3" tabindex

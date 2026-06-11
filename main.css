@@ -1,0 +1,41 @@
+/* variables globales */
+:root {
+  --primary: #3498db;   /* color primario (azul) */
+  --secondary: #2ecc71; /* color secundario (verde) */
+}
+
+/* tipografía y fondo base */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--primary);
+  background-color: #f5f5f5;
+}
+
+/* estilo de los botones */
+button,
+.btn {
+  background-color: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* efecto hover */
+button:hover,
+.btn:hover {
+  background-color: var(--secondary);
+  transform: translateY(-2px);
+}
+
+/* ajustes para dispositivos móviles (≤600 px) */
+@media (max-width: 600px) {
+  button,
+  .btn {
+    width: 100%;
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+}
